@@ -1,0 +1,9 @@
+assignment1/domain/RunningInfoRepository.class
+assignment1/service/RunningInfoService.class
+assignment1/rest/RunningRestController$HealthWarningLevel.class
+assignment1/service/impl/RunningInfoServiceImpl.class
+assignment1/rest/RunningRestController.class
+assignment1/domain/ResultInfo.class
+assignment1/domain/RunningInfo.class
+assignment1/domain/UserInfo.class
+assignment1/RunningInfoAnalysisServiceApplication.class

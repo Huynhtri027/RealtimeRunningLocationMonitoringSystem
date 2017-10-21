@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 public class SupplyLocationBulkUploadController {
@@ -26,4 +27,5 @@ public class SupplyLocationBulkUploadController {
     public void delete() {
         this.repository.deleteAll();
     }
+
 }

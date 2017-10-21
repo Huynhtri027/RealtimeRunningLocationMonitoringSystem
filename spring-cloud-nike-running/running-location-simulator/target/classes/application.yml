@@ -1,0 +1,11 @@
+server:
+  port: 9005
+
+com:
+  zeyu:
+    running:
+      location:
+        distribution: http://localhost:9006
+spring:
+  application:
+    name: running-location-simulator

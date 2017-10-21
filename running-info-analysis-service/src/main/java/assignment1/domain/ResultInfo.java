@@ -17,19 +17,6 @@ public class ResultInfo {
     public ResultInfo() {
     }
 
-    @Override
-    public String toString() {
-        return "ResultInfo{" +
-                "runningId='" + runningId + '\'' +
-                ", totalRunningTime=" + totalRunningTime +
-                ", heartRate=" + heartRate +
-                ", userId=" + userId +
-                ", username='" + username + '\'' +
-                ", userAddress='" + userAddress + '\'' +
-                ", healthWarningLevel='" + healthWarningLevel + '\'' +
-                '}';
-    }
-
     public ResultInfo(String runningId, double totalRunningTime,
                       int heartRate, long userId,
                       String username, String userAddress,

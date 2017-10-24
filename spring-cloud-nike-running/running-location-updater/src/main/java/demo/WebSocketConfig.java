@@ -11,9 +11,9 @@ import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
     @Override
-    public void configureMessageBroker(MessageBrokerRegistry config) {
-        config.enableSimpleBroker("/topic/locations");
-        config.setApplicationDestinationPrefixes("/app");
+    public void configureMessageBroker(MessageBrokerRegistry resgistry) {
+        resgistry.enableSimpleBroker("/topic/locations");
+        resgistry.setApplicationDestinationPrefixes("/app");
     }
 
     @Override

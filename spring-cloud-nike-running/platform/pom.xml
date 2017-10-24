@@ -14,8 +14,6 @@
     <name>Cloud Infrastructure Servie</name>
     <modules>
         <module>eureka</module>
-        <module>../hystrix-dashboard</module>
-        <module>../hystrix-dashboard</module>
         <module>hystrix-dashboard</module>
     </modules>
 

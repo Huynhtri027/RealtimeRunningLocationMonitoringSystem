@@ -13,5 +13,12 @@
     <artifactId>order-service</artifactId>
     <version>1.0.0.BUILD-SNAPSHOT</version>
 
+    <name>order-service</name>
+    <description>Spring Food Order Service</description>
+
+    <dependencies>
+
+    </dependencies>
+
 
 </project>

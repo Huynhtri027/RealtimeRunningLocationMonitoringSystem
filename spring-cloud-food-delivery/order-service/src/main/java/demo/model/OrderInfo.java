@@ -37,7 +37,7 @@ public class OrderInfo {
     private int expirationYear;
     private int securityCode;
 
-    private boolean paymentComplete = false;
+    private boolean paymentComplete;
 
     @JsonCreator
     public OrderInfo(@JsonProperty("userName") String userName,
@@ -52,10 +52,11 @@ public class OrderInfo {
         this.orderedItem = orderedItem;
         this.note = note;
         this.deliveryAddress = deliveryAddress;
-        this.totalPrice = orderedItem.getItemPrice();
+        this.totalPrice = orderedItem.getItemPrice() * orderedItem.getItemQuantity();
         this.cardNum = cardNum;
         this.expirationMonth = expirationMonth;
         this.expirationYear = expirationYear;
         this.securityCode = securityCode;
+        this.paymentComplete = false;
     }
 }

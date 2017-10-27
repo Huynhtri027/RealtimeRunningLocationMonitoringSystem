@@ -1,0 +1,9 @@
+server:
+  port: 9014
+spring:
+  application:
+    name: restaurant-delivery-service
+  cloud:
+    stream:
+      bindings:
+        input: delivery

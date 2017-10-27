@@ -2,7 +2,7 @@
 /home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/service/OrderInfoService.java
 /home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/service/impl/OrderInfoServiceImpl.java
 /home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/model/OrderInfoRepository.java
-/home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/model/CreditCardInfo.java
+/home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/model/PaymentInfo.java
 /home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/OrderServiceApplication.java
 /home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/model/OrderedItem.java
 /home/vagrant/workspace/spring-cloud-food-delivery/order-service/src/main/java/demo/model/OrderInfo.java

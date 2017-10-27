@@ -5,4 +5,4 @@ demo/model/OrderInfoRepository.class
 demo/service/impl/OrderInfoServiceImpl.class
 demo/rest/OrderRestController.class
 demo/model/OrderedItem.class
-demo/model/CreditCardInfo.class
+demo/model/PaymentInfo.class

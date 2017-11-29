@@ -1,12 +1,12 @@
-##ReadMe
-###Author: Zeyu Ni
-###Application Name: Running Information Analysis-Service
+## ReadMe
+### Author: Zeyu Ni
+### Application Name: Running Information Analysis-Service
 
 ----------
 running-information-analysis-service is a RESTful service in spring boot, using Maven as build tool.
 
-###Steps to run the application in command line:
-####1.Run Docker
+### Steps to run the application in command line:
+#### 1.Run Docker
 (1) go to current path
 
     cd ~/workspace/running-info-analysis-service
@@ -16,7 +16,7 @@ for MySQL
 
     docker-compose up
 
-####2.Run spring boot application (open another window of terminal)
+#### 2.Run spring boot application (open another window of terminal)
 (1) go to current path. 
 
     cd ~/workspace/running-info-analysis-service
@@ -28,8 +28,8 @@ for MySQL
 
 ----------
 
-###Steps to test the three functions of the application using “Postman”:
-####1. Test for Upload
+### Steps to test the three functions of the application using “Postman”:
+#### 1. Test for Upload
 (1) choose “POST” request and input url: http://localhost:8888/runningInfo
 (2) Choose “Body” and “raw” data type, and cope&paste the test Json data in to form 
 (3) “Status: 201 Created” indicate the successful upload

@@ -34,18 +34,18 @@ for MySQL
 (2) Choose “Body” and “raw” data type, and cope&paste the test Json data in to form 
 (3) “Status: 201 Created” indicate the successful upload
 
-####2. Test for get all running information sort by HealthWarningLevel
+#### 2. Test for get all running information sort by HealthWarningLevel
 (1) choose “GET” request and input url: http://localhost:8888/runningInfo?page=0&size=2
 (2) the param page and size can be changed
 
-####3. Test for delete
+#### 3. Test for delete
 (1) choose “Delete” request 
 (2) input url: http://localhost:8888/runningInfo/delete/runningId (change “runningId” to real Id number)
 (3) check the delete result using “GET” Request
 
 Finished! Thank your for review.
 
-###Test Data:
+### Test Data:
 [
 {
 "runningId": "7c08973d-bed4-4cbd-9c28-9282a02a6032", "latitude": "38.9093216",

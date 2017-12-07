@@ -1,4 +1,5 @@
 demo/PaymentServiceApplication.class
+demo/model/RecordInfo.class
 demo/model/PaymentInfoRepository.class
 demo/service/PaymentInfoService.class
 demo/service/impl/PaymentInfoServiceImpl.class

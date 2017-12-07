@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 @Data
 @Entity
@@ -22,26 +24,30 @@ public class OrderInfo {
     @GeneratedValue
     private Long orderId;
     private String userName;
+    private String restaurantName;
 
     @Embedded
-    private OrderedItem orderedItem;
+    private List<OrderedItem> orderedItems;
 
     private String note;
     private String deliveryAddress;
     private double totalPrice;
+    private int deliveryTime;
     private Date orderedTimestamp;
-    private Date paymentTimestamp;
 
     private int cardNum;
     private int expirationMonth;
     private int expirationYear;
     private int securityCode;
 
+    private Long paymentId;
+    private Date paymentTimestamp;
     private boolean paymentComplete;
 
     @JsonCreator
     public OrderInfo(@JsonProperty("userName") String userName,
-                     @JsonProperty("orderedItem") OrderedItem orderedItem,
+                     @JsonProperty("restaurantName") String restaurantName,
+                     @JsonProperty("orderedItem") List<OrderedItem> orderedItems,
                      @JsonProperty("note") String note,
                      @JsonProperty("deliveryAddress") String deliveryAddress,
                      @JsonProperty("cardNum") int cardNum,
@@ -49,14 +55,24 @@ public class OrderInfo {
                      @JsonProperty("expirationYear") int expirationYear,
                      @JsonProperty("securityCode") int securityCode) {
         this.userName = userName;
-        this.orderedItem = orderedItem;
+        this.orderedItems = orderedItems;
         this.note = note;
         this.deliveryAddress = deliveryAddress;
-        this.totalPrice = orderedItem.getItemPrice() * orderedItem.getItemQuantity();
+        for (OrderedItem orderedItem : orderedItems) {
+            this.totalPrice += orderedItem.getItemPrice() * orderedItem.getItemQuantity();
+        }
+
+        this.deliveryTime = generateDeliveryTime();
+        this.orderedTimestamp = new Date();
         this.cardNum = cardNum;
         this.expirationMonth = expirationMonth;
         this.expirationYear = expirationYear;
         this.securityCode = securityCode;
         this.paymentComplete = false;
+    }
+
+    private int generateDeliveryTime() {
+        Random random = new Random();
+        return this.deliveryTime = random.nextInt(55) + 5;
     }
 }

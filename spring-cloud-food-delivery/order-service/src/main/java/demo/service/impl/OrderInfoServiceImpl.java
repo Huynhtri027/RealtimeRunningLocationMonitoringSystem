@@ -1,5 +1,6 @@
 package demo.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import demo.model.OrderInfo;
 import demo.model.OrderInfoRepository;
 import demo.model.PaymentInfo;
@@ -29,7 +30,7 @@ public class OrderInfoServiceImpl implements OrderInfoService {
 
     @Override
     public OrderInfo saveOrderInfo(OrderInfo orderInfo) {
-        log.info("Service: " + orderInfo);
+        log.info("OrderInfo has been saved: " + orderInfo);
         return orderInfoRepository.save(orderInfo);
     }
 

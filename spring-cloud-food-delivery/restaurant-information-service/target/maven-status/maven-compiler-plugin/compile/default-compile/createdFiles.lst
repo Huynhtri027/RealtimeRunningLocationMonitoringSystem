@@ -1,5 +1,5 @@
-demo/model/MenuInfo.class
 demo/model/RestaurantInfoRepository.class
 demo/rest/RestaurantInfoController.class
 demo/model/RestaurantInfo.class
 demo/RestaurantInfomationServiceApplication.class
+demo/model/MenuInfo.class

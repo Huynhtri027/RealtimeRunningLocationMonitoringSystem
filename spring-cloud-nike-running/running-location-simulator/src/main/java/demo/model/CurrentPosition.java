@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
- * DTO data transfer object
+ * DTO Data Transfer Object
  * 1. Entity ....... -> REST API -> Front-end
  *    Entity -> DTO class (service layer) -> REST API -> Client
  *    UserEntity (id, username, password, firstName, lastName) -> User (DTO) (id, username, password) -> REST API -> Client

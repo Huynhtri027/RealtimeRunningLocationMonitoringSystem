@@ -38,7 +38,7 @@ public class LocationSimulatorRestApi {
 
 
     //1. loadSimulatorFixture
-    //2. Transform domain model simulator request to a class that can be executed by taskExecutor
+    //2. Transform demo.domain model simulator request to a class that can be executed by taskExecutor
     //3. taskExecutor.submit(simulator);
     //4. simulation starts
     @RequestMapping("/simulation")

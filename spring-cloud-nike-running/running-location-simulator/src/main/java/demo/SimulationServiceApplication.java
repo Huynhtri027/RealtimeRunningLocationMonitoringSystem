@@ -18,7 +18,6 @@ public class SimulationServiceApplication {
         SpringApplication.run(SimulationServiceApplication.class, args);
     }
 
-
     //ThreadPoolTaskScheduler actually implements Spring's TaskExecutor
     @Bean
     public AsyncTaskExecutor taskExecutor() {

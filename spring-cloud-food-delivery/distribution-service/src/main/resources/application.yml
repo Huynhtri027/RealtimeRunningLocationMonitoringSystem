@@ -1,0 +1,9 @@
+server:
+  port: 9013
+spring:
+  application:
+    name: distribution-service
+  cloud:
+    stream:
+      bindings:
+        output: delivery

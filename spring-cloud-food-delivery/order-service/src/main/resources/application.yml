@@ -1,0 +1,11 @@
+server:
+  port: 9011
+spring:
+  application:
+    name: order-service
+com:
+  zeyu:
+    payment:
+      service: http://localhost:9012
+    distribution:
+      service: http://localhost:9013

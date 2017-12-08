@@ -1,0 +1,6 @@
+demo/rest/SupplyLocationBulkUploadController.class
+demo/domain/SupplyLocationRepository.class
+demo/SupplyLocationServiceApplication.class
+demo/service/SupplyLocationService.class
+demo/service/impl/SupplyLocationServiceImpl.class
+demo/domain/SupplyLocation.class

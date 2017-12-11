@@ -7,6 +7,7 @@ demo/service/impl/DefaultGpsSimulatorFactory.class
 demo/rest/LocationSimulatorRestApi.class
 demo/support/NavUtils.class
 demo/model/SimulatorInitLocations.class
+demo/model/UserInputLocation.class
 demo/model/RunnerStatus.class
 demo/service/PathService.class
 demo/model/CurrentPosition.class

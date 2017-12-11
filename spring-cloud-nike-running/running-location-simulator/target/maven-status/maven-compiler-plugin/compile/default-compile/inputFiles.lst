@@ -2,6 +2,7 @@
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/task/LocationSimulatorInstance.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/rest/LocationSimulatorRestApi.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/CurrentPosition.java
+/home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/UserInputLocation.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/task/LocationSimulator.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/Leg.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/support/NavUtils.java

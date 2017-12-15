@@ -7,3 +7,11 @@ spring:
     stream:
       bindings:
         input: locations
+security:
+  oauth2:
+    client:
+      client-id: 22CGJH
+      client-secret: 6e3e9bf3dbd98f120521237c9da62969
+      access-token-uri: https://api.fitbit.com/oauth2/token
+      user-authorization-uri: https://www.fitbit.com/oauth2/authorize
+      token-name: oauth_token

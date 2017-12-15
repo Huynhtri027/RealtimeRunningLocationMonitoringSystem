@@ -85,7 +85,6 @@ public class LocationSimulatorRestApi {
             taskFutures.put(locationSimulator.getId(), instance);//cancel
             instances.add(instance);
         }
-
     }
 
 //    @RequestMapping("/simulation")

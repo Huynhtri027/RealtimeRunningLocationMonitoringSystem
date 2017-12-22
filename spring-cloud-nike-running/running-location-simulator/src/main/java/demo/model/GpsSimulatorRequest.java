@@ -14,7 +14,7 @@ public class GpsSimulatorRequest {
     private boolean exportPositionsToMessaging = true;
     private Integer reportInterval = 500;
     private int secondsToError = 0;
-    private RunnerStatus runnerStatus = RunnerStatus.NONE;
+    private RunnerStatus runnerStatus;
     private String polyline;
     //@Nike Running
     private MedicalInfo medicalInfo;

@@ -109,6 +109,8 @@
 
     function subscribe() {
         subscription = client.subscribe(queueName, function (d) {
+            console.log("got response");
+            console.log(d);
             responseDiv.innerHTML = responseDiv.innerHTML + d.body + '\n';
         });
         responseDiv.innerHTML = responseDiv.innerHTML + 'Subscribed to ' + queueName + '\n';

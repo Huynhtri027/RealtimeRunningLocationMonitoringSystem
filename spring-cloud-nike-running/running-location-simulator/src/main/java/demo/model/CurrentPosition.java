@@ -17,7 +17,7 @@ import lombok.Data;
 public class CurrentPosition { // object to send to distribution service
     private String runningId;
     private Point location;
-    private RunnerStatus runnerStatus = RunnerStatus.NONE;
+    private RunnerStatus runnerStatus;
     private Double speed;
     private Double heading;// forward direction in earth
 

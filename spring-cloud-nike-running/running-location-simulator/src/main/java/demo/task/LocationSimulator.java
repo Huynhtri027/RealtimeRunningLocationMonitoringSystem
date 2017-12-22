@@ -30,7 +30,7 @@ public class LocationSimulator implements Runnable {
     private Integer reportInterval = 500; // millisecs at which to send position reports
     private PositionInfo positionInfo = null;
     private List<Leg> legs;
-    private RunnerStatus runnerStatus = RunnerStatus.NONE;
+    private RunnerStatus runnerStatus;
     private String runningId;
 
     private Integer secondsToError = 45;
@@ -56,8 +56,6 @@ public class LocationSimulator implements Runnable {
     @Override
     public void run() {
         try {
-            System.out.println(Thread.currentThread().getName());
-            System.out.println("alex123");
             executionStartTime = new Date();
             if (cancel.get()) {
                 destroy();
@@ -75,18 +73,19 @@ public class LocationSimulator implements Runnable {
 
                     if (this.secondsToError > 0 && startTime - executionStartTime
                             .getTime() >= this.secondsToError * 1000) {
-                        this.runnerStatus = RunnerStatus.SUPPLY_NOW;
+                        this.runnerStatus.setStatus(Status.SUPPLY_NOW);
                     }
 
                     if (isFinished == true) {
-                        this.runnerStatus = RunnerStatus.STOP_NOW;
+                        this.runnerStatus.setStatus(Status.STOP_NOW);
+                        this.runnerStatus.setFinished(true);
                     }
 
                     positionInfo.setRunnerStatus(this.runnerStatus);
 
                     final MedicalInfo medicalInfoToUse;
 
-                    switch (this.runnerStatus) {
+                    switch (this.runnerStatus.getStatus()) {
                         case SUPPLY_SOON:
                         case SUPPLY_NOW:
                             medicalInfoToUse = this.medicalInfo;
@@ -115,7 +114,7 @@ public class LocationSimulator implements Runnable {
                     positionInfoService
                             .processPositionInfo(id, currentPosition, this.exportPositionsToMessaging);
 
-                    if (this.runnerStatus == RunnerStatus.STOP_NOW) {
+                    if (this.runnerStatus.getStatus() == Status.STOP_NOW && isFinished == true) {
                         destroy();
                     }
                 }

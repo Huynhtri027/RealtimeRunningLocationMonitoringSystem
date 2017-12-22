@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -45,10 +44,9 @@ public class DefaultPositionService implements PositionService {
         if (sendPositionsToDistributionService) {
             log.info(String
                     .format("Thread %d Simulator is callling distribution REST API", Thread.currentThread().getId()));
+            log.info(String.format("The info sent to distribution Service: ", currentPosition.toString()));
             this.restTemplate.postForLocation(runningLocationDistribution + "/api/locations", currentPosition);
-
         }
-
     }
 
     public void processPositionInfoFallback(long id, CurrentPosition currentPosition,

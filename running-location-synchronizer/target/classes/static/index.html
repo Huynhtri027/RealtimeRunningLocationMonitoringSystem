@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="app" ng-controller="home as home">
+<h1>Login</h1>
+<div class="container" ng-show="!home.authenticated">
+    With Fitbit: <a href="/login">click here</a>
+</div>
+<div class="container" ng-show="home.authenticated">
+    Logged in as: <span ng-bind="home.user"></span><br/>
+    Lifetime Steps: <span ng-bind="home.lifetimeSteps"></span><br/>
+    Lifetime Distance: <span ng-bind="home.lifetimeDistance"></span><br/>
+    Lifetime Floors: <span ng-bind="home.lifetimeFloors"></span><br/>
+
+
+    <div ng-controller="repeatController">
+        Get our recent activities
+        <button ng-click="showHandler()">click here</button>
+
+        <div ng-show="showActivities">
+            You have {{records.length}} records. They are:
+            <ul class="example-animate-container">
+                <li class="animate-repeat" ng-repeat="record in records">
+                    [{{$index + 1}}] ActivityId: {{record.activityId}}, Distance: {{record.distance}}, StartDate:
+                    {{record.startDate}}, StartTime: {{record.startTime}}
+                    <button ng-click="clickHandler(record)" ng-hide=record.upload>Upload To Fitbit</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+{{records}}
+<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module("app", []).controller("home", function ($scope, $http) {
+        $scope.test = "nizeyu";
+        var self = this;
+        $http.get("/user").success(function (data) {
+            console.log("/user success");
+            self.user = data.userAuthentication.details.user.fullName;
+            self.authenticated = true;
+        }).error(function () {
+            console.log("/user fait");
+            self.user = "N/A";
+            self.authenticated = false;
+        });
+        $http.get("/lifetime-activity").success(function (data) {
+            self.lifetimeSteps = data.steps.toLocaleString();
+            self.lifetimeFloors = data.floors.toLocaleString();
+            self.lifetimeDistance = data.distance.toLocaleString();
+            console.log("/la success");
+        }).error(function () {
+            console.log("/la fail");
+            self.lifetimeSteps = "N/A";
+        });
+    });
+
+    angular.module('app').controller('repeatController', function ($scope, $http) {
+        $scope.showActivities = false;
+        $scope.clickHandler = function (record) {
+            $http.post("/uploadToFitbit", record).then(function (data) {
+                console.log(data);
+                console.log("/fitbit upload success");
+            }).catch(function (data) {
+                console.log("/fitbit upload fail");
+            });
+        };
+        $scope.showHandler = function () {
+
+            $http.get("http://localhost:9007/getFitbitInfo").success(function (data) {
+                $scope.showActivities = true;
+
+                $scope.records = data;
+                console.log("/fitbit success");
+            }).error(function () {
+                console.log("/fitbit fail");
+            });
+        };
+
+    });
+</script>
+</body>
+</html>

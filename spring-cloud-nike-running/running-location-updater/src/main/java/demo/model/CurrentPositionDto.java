@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class CurrentPositionDto {
     private String runningId;
     private Point location;
-    private RunnerStatus runnerStatus = RunnerStatus.NONE;
+    private RunnerStatus runnerStatus;
     private Double speed;
     private Double heading;
 }

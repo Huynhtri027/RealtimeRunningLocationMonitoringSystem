@@ -1,12 +1,13 @@
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/GpsSimulatorRequest.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/task/LocationSimulatorInstance.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/rest/LocationSimulatorRestApi.java
+/home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/Status.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/CurrentPosition.java
-/home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/UserInputLocation.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/task/LocationSimulator.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/Leg.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/support/NavUtils.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/impl/DefaultGpsSimulatorFactory.java
+/home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/DirectionService.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/GpsSimulatorFactory.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/Point.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/RunnerStatus.java
@@ -14,7 +15,9 @@
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/MedicalInfo.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/impl/DefaultPathService.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/PositionService.java
+/home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/DirectionLocation.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/PathService.java
+/home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/impl/DefaultDirectionService.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/service/impl/DefaultPositionService.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/model/PositionInfo.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-simulator/src/main/java/demo/SimulationServiceApplication.java

@@ -1,9 +1,6 @@
-# RealtimeRunningLocationMonitoringSystem
 # README #
-
-## Capstone: Design Proposal
+# Project Name: Realtime Running Location Monitoring System
 ## Author: Zeyu Ni
-## Track Name: Real-time Running Location Monitoring System
 ----------
 ## Overview:
 Running Tracking System is a real-time application which can simulate runners' running path and sent location and activity information to Fitbit API.

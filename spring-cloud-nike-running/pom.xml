@@ -23,6 +23,7 @@
         <module>running-location-service</module>
         <module>supply-location-service</module>
         <module>platform</module>
+        <module>running-location-synchronizer</module>
     </modules>
 
     <properties>

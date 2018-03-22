@@ -1,32 +1,33 @@
 package demo.rest;
 
+import demo.model.DirectionLocation;
 import demo.model.GpsSimulatorRequest;
 import demo.model.Point;
-import demo.model.RunnerStatus;
 import demo.model.SimulatorInitLocations;
+import demo.service.DirectionService;
 import demo.service.GpsSimulatorFactory;
 import demo.service.PathService;
 import demo.task.LocationSimulator;
 import demo.task.LocationSimulatorInstance;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.task.AsyncTaskExecutor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Future;
 
+@Slf4j
 @RestController
 @RequestMapping("/api")
 public class LocationSimulatorRestApi {
+
     @Autowired
     private PathService pathService;
+
+    @Autowired
+    private DirectionService directionService;
 
     @Autowired
     private GpsSimulatorFactory gpsSimulatorFactory;
@@ -36,6 +37,30 @@ public class LocationSimulatorRestApi {
 
     private Map<Long, LocationSimulatorInstance> taskFutures = new HashMap<>();
 
+    @RequestMapping(value = "/direction", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void directionSimulation(@RequestBody DirectionLocation location) throws Exception {
+
+        final SimulatorInitLocations fixture = directionService.generateSimulatorInitLocations(location);
+
+        final List<LocationSimulatorInstance> instances = new ArrayList<>();
+        final List<Point> lookAtPoints = new ArrayList<>();
+
+        final Set<Long> instanceIds = new HashSet<>(taskFutures.keySet());
+
+        for (GpsSimulatorRequest gpsSimulatorRequest : fixture.getGpsSimulatorRequests()) {
+
+            final LocationSimulator locationSimulator = gpsSimulatorFactory.prepareGpsSimulator(gpsSimulatorRequest);
+            lookAtPoints.add(locationSimulator.getStartPoint());
+            instanceIds.add(locationSimulator.getId());
+
+            final Future<?> future = taskExecutor.submit(locationSimulator);
+            final LocationSimulatorInstance instance = new LocationSimulatorInstance(locationSimulator
+                    .getId(), locationSimulator, future);
+            taskFutures.put(locationSimulator.getId(), instance);//cancel
+            instances.add(instance);
+        }
+    }
 
     //1. loadSimulatorFixture
     //2. Transform demo.domain model simulator request to a class that can be executed by taskExecutor

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css"
+          href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body ng-app="app" ng-controller="home as home">
+<h1 align="center">Real-time Running Location Monitoring System</h1>
+<div class="container" ng-show="!home.authenticated">
+    <h2 align="right">Login to Fitbit: <a href="/login">click here</a></h2>
+</div>
+<div class="container" ng-show="home.authenticated">
+    <h2>Logged in as: <span ng-bind="home.user"></span></h2>
+    <br/>
+    <br/>
+    <div ng-controller="repeatController">
+        <h2>Acquire your recent activities: </h2>
+        <button ng-click="showHandler()">click here</button>
+
+        <div ng-show="showActivities">
+            <h2>You have {{records.length}} activity records as follows:</h2>
+            <ul class="example-animate-container">
+                <li class="animate-repeat" ng-repeat="record in records">
+                    <h4>[{{$index + 1}}] ActivityId: {{record.activityId}}, Distance: {{record.distance}}, StartDate:
+                        {{record.startDate}}, StartTime: {{record.startTime}}
+                        <button ng-click="clickHandler(record)" ng-hide=record.upload>Upload To Fitbit</button>
+                    </h4>
+                    <br/>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
+<script type="text/javascript">
+    angular.module("app", []).controller("home", function ($scope, $http) {
+        $scope.test = "nizeyu";
+        var self = this;
+        $http.get("/user").success(function (data) {
+            console.log("/user success");
+            self.user = data.userAuthentication.details.user.fullName;
+            self.authenticated = true;
+        }).error(function () {
+            console.log("/user fail");
+            self.user = "N/A";
+            self.authenticated = false;
+        });
+    });
+
+    angular.module('app').controller('repeatController', function ($scope, $http) {
+        $scope.showActivities = false;
+        $scope.clickHandler = function (record) {
+            $http.post("/uploadToFitbit", record).then(function (data) {
+                console.log(data);
+                record.upload = true;
+                console.log("/fitbit upload success");
+                $scope.saveToMongoDB(record);
+            }).catch(function (data) {
+                console.log("/fitbit upload fail");
+            });
+        };
+        $scope.showHandler = function () {
+            $http.get("http://localhost:9007/getFitbitInfo").success(function (data) {
+                $scope.showActivities = true;
+
+                $scope.records = data;
+                console.log("/fitbit success");
+            }).error(function () {
+                console.log("/fitbit fail");
+            });
+        };
+
+        $scope.saveToMongoDB = function (record) {
+            $http.post("http://localhost:9007/saveToFitbit", record).then(function (data) {
+                console.log("/update to mongoDB success");
+            }).catch(function (data) {
+                console.log("/update to mongoDB fail");
+            });
+        };
+    });
+</script>
+</body>
+</html>

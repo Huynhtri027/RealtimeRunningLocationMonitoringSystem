@@ -1,8 +1,8 @@
 package demo.task;
 
 
-import demo.service.PositionService;
 import demo.model.*;
+import demo.service.PositionService;
 import demo.support.NavUtils;
 
 import java.util.Date;
@@ -24,12 +24,13 @@ public class LocationSimulator implements Runnable {
 
     private Double speedInMps; // In meters/sec
     private boolean shouldMove;
+    private boolean isFinished = false;
     private boolean exportPositionsToMessaging = true;
 
     private Integer reportInterval = 500; // millisecs at which to send position reports
     private PositionInfo positionInfo = null;
     private List<Leg> legs;
-    private RunnerStatus runnerStatus = RunnerStatus.NONE;
+    private RunnerStatus runnerStatus;
     private String runningId;
 
     private Integer secondsToError = 45;
@@ -72,18 +73,26 @@ public class LocationSimulator implements Runnable {
 
                     if (this.secondsToError > 0 && startTime - executionStartTime
                             .getTime() >= this.secondsToError * 1000) {
-                        this.runnerStatus = RunnerStatus.SUPPLY_NOW;
+                        this.runnerStatus.setStatus(Status.SUPPLY_NOW);
+                    }
+
+                    if (isFinished == true) {
+                        this.runnerStatus.setStatus(Status.STOP_NOW);
+                        this.runnerStatus.setFinished(true);
                     }
 
                     positionInfo.setRunnerStatus(this.runnerStatus);
 
                     final MedicalInfo medicalInfoToUse;
 
-                    switch (this.runnerStatus) {
+                    switch (this.runnerStatus.getStatus()) {
                         case SUPPLY_SOON:
                         case SUPPLY_NOW:
+                            medicalInfoToUse = this.medicalInfo;
+                            break;
                         case STOP_NOW:
                             medicalInfoToUse = this.medicalInfo;
+                            this.shouldMove = false;
                             break;
                         default:
                             medicalInfoToUse = null;
@@ -99,9 +108,13 @@ public class LocationSimulator implements Runnable {
                             positionInfo.getLeg().getHeading(),
                             medicalInfoToUse
                     );
+
                     positionInfoService
                             .processPositionInfo(id, currentPosition, this.exportPositionsToMessaging);
 
+                    if (this.runnerStatus.getStatus() == Status.STOP_NOW && isFinished) {
+                        destroy();
+                    }
                 }
 
                 // wait till next position report
@@ -158,9 +171,14 @@ public class LocationSimulator implements Runnable {
                 return;
             }
             distanceFromStart = excess;
+
+            if (i == legs.size() - 1) {
+                this.isFinished = true;
+                return;
+            }
         }
 
-        setStartPosition();
+        //setStartPosition();
     }
 
     /**

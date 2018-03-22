@@ -7,3 +7,33 @@ spring:
     stream:
       bindings:
         input: locations
+security:
+  oauth2:
+    client:
+      clientId: 22CGJH
+      clientSecret: 0ad52b7c46caa79211a8e5fbc6163519
+      accessTokenUri: https://api.fitbit.com/oauth2/token
+      userAuthorizationUri: https://www.fitbit.com/oauth2/authorize
+      tokenName: oauth_token
+      authenticationScheme: header
+      clientAuthenticationScheme: header
+      scope: "activity profile"
+    resource:
+      userInfoUri: https://api.fitbit.com/1/user/-/profile.json
+fitbit:
+  api:
+    resource:
+      activitiesUri: https://api.fitbit.com/1/user/-/activities.json
+logging:
+  level:
+    org.springframework.security: TRACE
+
+
+
+
+
+
+
+
+
+

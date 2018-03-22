@@ -1,0 +1,7 @@
+demo/rest/FitbitApiRestController.class
+demo/RunningLocationSynchronizerApplication.class
+demo/model/Activity.class
+demo/model/FitbitInfo.class
+demo/model/LifetimeActivities.class
+demo/model/LifetimeActivity.class
+demo/model/FitbitAPIConfiguration.class

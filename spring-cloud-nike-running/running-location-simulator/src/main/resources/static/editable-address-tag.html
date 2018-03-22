@@ -1,0 +1,63 @@
+<link rel="import" href="./bower_components/polymer/polymer.html">
+<!-- import the iron-input custom element -->
+<link rel="import" href="./bower_components/iron-input/iron-input.html">
+<!-- import the iron-ajax custom element -->
+<link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="editable-address-tag">
+
+    <style>
+    </style>
+
+    <template>
+
+        <p>
+            The start address is: <strong>{{startAddress}}</strong>.
+        </p>
+
+        <input is="iron-input" bind-value="{{startAddress}}"
+               placeholder="Your start address here...">
+
+        <p>
+            The end address is: <strong>{{endAddress}}</strong>.
+        </p>
+
+        <input is="iron-input" bind-value="{{endAddress}}"
+               placeholder="Your end address here...">
+
+        <br>
+        <br>
+
+        <button on-click="handleClick">Submit</button>
+
+        <iron-ajax
+                id="AjaxPost"
+                url="/api/direction"
+                method="POST"
+                content-type="application/json"
+                handle-as="json"
+                debounce-duration="300"></iron-ajax>
+
+    </template>
+
+    <script>
+        Polymer({
+            is: "editable-address-tag",
+            properties: {
+                startAddress: {
+                    type: String,
+                    value: "1235 Wildwood Ave, Sunnyvale, CA 94089"
+                },
+                endAddress: {
+                    type: String,
+                    value: "Pho Nam Restaurant, 1205 Wildwood Ave, Sunnyvale, CA 94089"
+                }
+            },
+
+            handleClick: function () {
+                this.$.AjaxPost.body = {"startAddress": this.startAddress, "endAddress": this.endAddress};
+                this.$.AjaxPost.generateRequest();
+            }
+        });
+    </script>
+</dom-module>

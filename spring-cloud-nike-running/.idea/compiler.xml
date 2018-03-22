@@ -11,6 +11,7 @@
         <module name="running-location-distribution" />
         <module name="running-location-service" />
         <module name="running-location-simulator" />
+        <module name="running-location-synchronizer" />
         <module name="running-location-updater" />
         <module name="supply-location-service" />
       </profile>
@@ -22,6 +23,7 @@
       <module name="running-location-distribution" target="1.8" />
       <module name="running-location-service" target="1.8" />
       <module name="running-location-simulator" target="1.8" />
+      <module name="running-location-synchronizer" target="1.8" />
       <module name="running-location-updater" target="1.8" />
       <module name="spring-cloud-nike-running" target="1.8" />
       <module name="supply-location-service" target="1.8" />

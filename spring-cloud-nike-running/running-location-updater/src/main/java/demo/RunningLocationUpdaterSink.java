@@ -37,7 +37,8 @@ public class RunningLocationUpdaterSink {
 
         if (position.getRunnerStatus().isFinished()) {
             FitbitInfo fitbitInfo = new FitbitInfo(position.getRunningId(), position.getRunnerStatus().getDistance(),
-                    position.getRunnerStatus().getStartDate(), position.getRunnerStatus().getStartTime(), position.getRunnerStatus().isUpload());
+                    position.getRunnerStatus().getStartDate(), position.getRunnerStatus().getStartTime(),
+                    position.getRunnerStatus().isUpload());
 
             FitbitInfo info = this.fitbitInfoService.saveFitbitInfo(fitbitInfo);
 

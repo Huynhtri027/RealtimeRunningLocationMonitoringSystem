@@ -26,14 +26,16 @@ public class DefaultDirectionService implements DirectionService {
 
         GeoApiContext context = new GeoApiContext().setApiKey(googleMapApiKey);
 
-        DirectionsRoute[] routes = DirectionsApi.newRequest(context).origin(locations.getStartAddress()).destination(locations.getEndAddress()).await();
+        DirectionsRoute[] routes = DirectionsApi.newRequest(context).origin(locations.getStartAddress())
+                .destination(locations.getEndAddress()).await();
 
         String pl = routes[0].overviewPolyline.getEncodedPath();
 
-        RunnerStatus runnerStatus = new RunnerStatus(Status.SUPPLY_SOON, 1000, "2017-12-13", "10:00:00", false, false);
+        RunnerStatus runnerStatus = new RunnerStatus(Status.SUPPLY_SOON, 1000, "2017-12-13",
+                "10:00:00", false, false);
 
-        GpsSimulatorRequest gsr = new GpsSimulatorRequest("90010", 50.0, true,
-                true, 1000, 0, runnerStatus, pl, mi);
+        GpsSimulatorRequest gsr = new GpsSimulatorRequest("90015", 50.0, true,
+                true, 10, 0, runnerStatus, pl, mi);
 
         log.info("Start address: " + routes[0].legs[0].startAddress);
         log.info("End address: " + routes[0].legs[0].endAddress);
@@ -47,6 +49,4 @@ public class DefaultDirectionService implements DirectionService {
 
         return fixture;
     }
-
-
 }

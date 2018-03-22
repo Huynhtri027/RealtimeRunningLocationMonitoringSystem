@@ -1,9 +1,9 @@
 package demo.rest;
 
-import com.google.maps.DirectionsApi;
-import com.google.maps.GeoApiContext;
-import com.google.maps.model.DirectionsRoute;
-import demo.model.*;
+import demo.model.DirectionLocation;
+import demo.model.GpsSimulatorRequest;
+import demo.model.Point;
+import demo.model.SimulatorInitLocations;
 import demo.service.DirectionService;
 import demo.service.GpsSimulatorFactory;
 import demo.service.PathService;
@@ -37,11 +37,11 @@ public class LocationSimulatorRestApi {
 
     private Map<Long, LocationSimulatorInstance> taskFutures = new HashMap<>();
 
-    @RequestMapping(value = "/input", method = RequestMethod.POST)
+    @RequestMapping(value = "/direction", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void upload(@RequestBody DirectionLocation locations) throws Exception {
+    public void directionSimulation(@RequestBody DirectionLocation location) throws Exception {
 
-        final SimulatorInitLocations fixture = directionService.generateSimulatorInitLocations(locations);
+        final SimulatorInitLocations fixture = directionService.generateSimulatorInitLocations(location);
 
         final List<LocationSimulatorInstance> instances = new ArrayList<>();
         final List<Point> lookAtPoints = new ArrayList<>();

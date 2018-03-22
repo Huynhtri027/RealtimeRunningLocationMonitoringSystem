@@ -8,10 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +16,7 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.security.Principal;
 
@@ -27,14 +25,12 @@ import java.security.Principal;
 @EnableWebSecurity
 @Slf4j
 public class FitbitApiRestController extends WebSecurityConfigurerAdapter {
-//    @RequestMapping(value = "/", method = RequestMethod.GET)
-//    public String helloWorld() {
-//        return "Hello Nike Running";
-//    }
-
 
     @Autowired
     OAuth2RestTemplate fitbitOAuthRestTemplate;
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @Value("${fitbit.api.resource.activitiesUri}")
     String fitbitActivitiesUri;
@@ -57,7 +53,6 @@ public class FitbitApiRestController extends WebSecurityConfigurerAdapter {
         } catch (Exception e) {
 
             lifetimeActivity = new LifetimeActivity();
-
         }
 
         return lifetimeActivity;
@@ -79,21 +74,11 @@ public class FitbitApiRestController extends WebSecurityConfigurerAdapter {
     @ResponseStatus(HttpStatus.CREATED)
     public String uploadToFitbit(@RequestBody FitbitInfo fitbitInfo) {
 
-        System.out.println("zeyuni123++++++++++++++++++++++++++++++++++++++");
         log.info("input123: " + fitbitInfo.toString());
-
-        log.info(fitbitInfo.getActivityId() + " " + String.valueOf(fitbitInfo.getDistance()) + " " +
-                fitbitInfo.getStartDate() + " " + fitbitInfo.getStartTime());
-
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> map = new LinkedMultiValueMap<String, String>();
-//        map.add("activityId", "90019");
-//        map.add("startTime", "20:00:00");
-//        map.add("durationMillis", "10");
-//        map.add("date", "2017-12-12");
-//        map.add("distance", "12.2");
 
         map.add("activityId", fitbitInfo.getActivityId());
         map.add("startTime", fitbitInfo.getStartTime());
@@ -101,19 +86,21 @@ public class FitbitApiRestController extends WebSecurityConfigurerAdapter {
         map.add("date", fitbitInfo.getStartDate());
         map.add("distance", String.valueOf(fitbitInfo.getDistance()));
 
+        HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
 
-        //HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<MultiValueMap<String, String>>(map, headers);
+        ResponseEntity<String> response = fitbitOAuthRestTemplate.postForEntity(fitbitActivitiesUri, request, String.class);
 
-        //ResponseEntity<String> response = fitbitOAuthRestTemplate.postForEntity(fitbitActivitiesUri, request, String.class);
-        ResponseEntity<String> response = fitbitOAuthRestTemplate.postForEntity(fitbitActivitiesUri, map, String.class);
-
-        //System.out.println("success123: " + response.toString());
+        //this.restTemplate.postForLocation("http://localhost:9007/saveToFitbit", fitbitInfo);
 
         return response.getBody();
     }
-
 }
 
+//        map.add("activityId", "90019");
+//        map.add("startTime", "20:00:00");
+//        map.add("durationMillis", "10");
+//        map.add("date", "2017-12-12");
+//        map.add("distance", "12.2");
 
 
 

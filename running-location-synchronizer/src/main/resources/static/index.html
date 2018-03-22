@@ -14,35 +14,33 @@
             src="/webjars/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body ng-app="app" ng-controller="home as home">
-<h1>Login</h1>
+<h1 align="center">Real-time Running Location Monitoring System</h1>
 <div class="container" ng-show="!home.authenticated">
-    With Fitbit: <a href="/login">click here</a>
+    <h2 align="right">Login to Fitbit: <a href="/login">click here</a></h2>
 </div>
 <div class="container" ng-show="home.authenticated">
-    Logged in as: <span ng-bind="home.user"></span><br/>
-    Lifetime Steps: <span ng-bind="home.lifetimeSteps"></span><br/>
-    Lifetime Distance: <span ng-bind="home.lifetimeDistance"></span><br/>
-    Lifetime Floors: <span ng-bind="home.lifetimeFloors"></span><br/>
-
-
+    <h2>Logged in as: <span ng-bind="home.user"></span></h2>
+    <br/>
+    <br/>
     <div ng-controller="repeatController">
-        Get our recent activities
+        <h2>Acquire your recent activities: </h2>
         <button ng-click="showHandler()">click here</button>
 
         <div ng-show="showActivities">
-            You have {{records.length}} records. They are:
+            <h2>You have {{records.length}} activity records as follows:</h2>
             <ul class="example-animate-container">
                 <li class="animate-repeat" ng-repeat="record in records">
-                    [{{$index + 1}}] ActivityId: {{record.activityId}}, Distance: {{record.distance}}, StartDate:
-                    {{record.startDate}}, StartTime: {{record.startTime}}
-                    <button ng-click="clickHandler(record)" ng-hide=record.upload>Upload To Fitbit</button>
+                    <h4>[{{$index + 1}}] ActivityId: {{record.activityId}}, Distance: {{record.distance}}, StartDate:
+                        {{record.startDate}}, StartTime: {{record.startTime}}
+                        <button ng-click="clickHandler(record)" ng-hide=record.upload>Upload To Fitbit</button>
+                    </h4>
+                    <br/>
                 </li>
             </ul>
         </div>
     </div>
 </div>
 
-{{records}}
 <script type="text/javascript" src="/webjars/angularjs/angular.min.js"></script>
 <script type="text/javascript">
     angular.module("app", []).controller("home", function ($scope, $http) {
@@ -53,18 +51,9 @@
             self.user = data.userAuthentication.details.user.fullName;
             self.authenticated = true;
         }).error(function () {
-            console.log("/user fait");
+            console.log("/user fail");
             self.user = "N/A";
             self.authenticated = false;
-        });
-        $http.get("/lifetime-activity").success(function (data) {
-            self.lifetimeSteps = data.steps.toLocaleString();
-            self.lifetimeFloors = data.floors.toLocaleString();
-            self.lifetimeDistance = data.distance.toLocaleString();
-            console.log("/la success");
-        }).error(function () {
-            console.log("/la fail");
-            self.lifetimeSteps = "N/A";
         });
     });
 
@@ -73,13 +62,14 @@
         $scope.clickHandler = function (record) {
             $http.post("/uploadToFitbit", record).then(function (data) {
                 console.log(data);
+                record.upload = true;
                 console.log("/fitbit upload success");
+                $scope.saveToMongoDB(record);
             }).catch(function (data) {
                 console.log("/fitbit upload fail");
             });
         };
         $scope.showHandler = function () {
-
             $http.get("http://localhost:9007/getFitbitInfo").success(function (data) {
                 $scope.showActivities = true;
 
@@ -90,6 +80,13 @@
             });
         };
 
+        $scope.saveToMongoDB = function (record) {
+            $http.post("http://localhost:9007/saveToFitbit", record).then(function (data) {
+                console.log("/update to mongoDB success");
+            }).catch(function (data) {
+                console.log("/update to mongoDB fail");
+            });
+        };
     });
 </script>
 </body>

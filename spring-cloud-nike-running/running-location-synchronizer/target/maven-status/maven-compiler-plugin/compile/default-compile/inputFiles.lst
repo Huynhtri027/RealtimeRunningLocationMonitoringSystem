@@ -2,5 +2,6 @@
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-synchronizer/src/main/java/demo/model/FitbitAPIConfiguration.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-synchronizer/src/main/java/demo/model/LifetimeActivity.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-synchronizer/src/main/java/demo/model/LifetimeActivities.java
+/home/vagrant/workspace/spring-cloud-nike-running/running-location-synchronizer/src/main/java/demo/model/FitbitInfo.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-synchronizer/src/main/java/demo/RunningLocationSynchronizerApplication.java
 /home/vagrant/workspace/spring-cloud-nike-running/running-location-synchronizer/src/main/java/demo/model/Activity.java

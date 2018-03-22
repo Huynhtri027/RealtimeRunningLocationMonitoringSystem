@@ -3,6 +3,7 @@ demo/RunningLocationUpdaterApplication.class
 demo/model/MedicalInfo.class
 demo/model/FitbitInfoRepository.class
 demo/model/Point.class
+demo/RunningLocationUpdaterApplication$1.class
 demo/model/SupplyLocation.class
 demo/service/FitbitInfoService.class
 demo/controller/FitbitInfoRestController.class

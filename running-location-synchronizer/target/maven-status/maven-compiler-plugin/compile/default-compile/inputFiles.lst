@@ -4,6 +4,5 @@
 /home/vagrant/workspace/running-location-synchronizer/src/main/java/demo/model/FitbitInfo.java
 /home/vagrant/workspace/running-location-synchronizer/src/main/java/demo/model/ActivityLog.java
 /home/vagrant/workspace/running-location-synchronizer/src/main/java/demo/model/Activity.java
-/home/vagrant/workspace/running-location-synchronizer/src/main/java/demo/rest/Controller.java
 /home/vagrant/workspace/running-location-synchronizer/src/main/java/demo/model/LifetimeActivity.java
 /home/vagrant/workspace/running-location-synchronizer/src/main/java/demo/model/FitbitAPIConfiguration.java

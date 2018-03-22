@@ -109,12 +109,10 @@ public class LocationSimulator implements Runnable {
                             medicalInfoToUse
                     );
 
-                    System.out.println(this.runnerStatus);
-
                     positionInfoService
                             .processPositionInfo(id, currentPosition, this.exportPositionsToMessaging);
 
-                    if (this.runnerStatus.getStatus() == Status.STOP_NOW && isFinished == true) {
+                    if (this.runnerStatus.getStatus() == Status.STOP_NOW && isFinished) {
                         destroy();
                     }
                 }
